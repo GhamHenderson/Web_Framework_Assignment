@@ -9,6 +9,5 @@ $security->firewall('main')
 
 ->rememberMe()
 ->secret('%kernel.secret%')
-
 ->alwaysRememberMe(true);
 };
