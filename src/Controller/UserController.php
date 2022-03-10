@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-#[isGranted('ROLE_ADMIN')]
 #[Route('/user')]
 class UserController extends AbstractController
 {
