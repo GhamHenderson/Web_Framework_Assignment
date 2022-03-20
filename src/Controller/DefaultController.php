@@ -11,8 +11,9 @@ class DefaultController extends AbstractController
     #[Route('/', name: 'default')]
     public function index(): Response
     {
+        $users[] = ["Graham", "James","Ian","Garry"];
         $template = 'default/index.html.twig';
-        $argsArray = [];
+        $argsArray = [$users];
 
         return $this->render($template, $argsArray);
     }
