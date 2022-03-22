@@ -3,22 +3,20 @@
 {% block title %}Menu index{% endblock %}
 
 {% block body %}
-    <h1>Menu index</h1>
+    <h1>Takeaway Menu</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>ItemName</th>
-                <th>ItemPrice</th>
-                <th>ItemDescription</th>
-                <th>IsAvailable</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Add to Cart</th>
             </tr>
         </thead>
         <tbody>
         {% for menu in menus %}
             <tr>
-                <td>{{ menu.id }}</td>
                 <td>{{ menu.itemName }}</td>
                 <td>{{ menu.ItemPrice }}</td>
                 <td>{{ menu.ItemDescription }}</td>

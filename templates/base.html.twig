@@ -22,10 +22,13 @@
                 <a href={{ path('user_index') }}>
                     home
                 </a><br>
+
                 {% if is_granted('ROLE_USER', 'ROLE_ADMIN') %}
                 <a href={{ path('menu_index') }}>
-                    Menu    {% endif %}
+                    Menu
                 </a><br>
+                {% endif %}
+
                 {% if is_granted('ROLE_ADMIN') %}
                     <a href= {{ path('user_index')}}>
                         Admin Area

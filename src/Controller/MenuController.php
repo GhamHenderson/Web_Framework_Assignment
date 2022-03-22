@@ -17,9 +17,9 @@ class MenuController extends AbstractController
     #[Route('/', name: 'menu_index', methods: ['GET'])]
     public function index(MenuRepository $menuRepository): Response
     {
-        return $this->render('menu/index.html.twig', [
-            'menus' => $menuRepository->findAll(),
-        ]);
+        $template = 'menu/index.html.twig';
+        $args =  ['menus' => $menuRepository->findAll(),];
+        return $this->render($template,$args);
     }
 
     #[Route('/new', name: 'menu_new', methods: ['GET', 'POST'])]
