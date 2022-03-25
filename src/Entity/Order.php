@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OrderRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
@@ -14,53 +16,129 @@ class Order
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'time')]
-    private $OrderTime;
+    /**
+     * @ORM\OneToMany(targetEntity=OrderItem::class, mappedBy="orderRef", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $items;
 
-    #[ORM\Column(type: 'date')]
-    private $orderDate;
+    #[ORM\Column(type: 'string', length: 255)]
+    private $status = self::STATUS_CART;
 
-    #[ORM\Column(type: 'float')]
-    private $orderTotal;
+    /**
+     * An order that is in progress, not placed yet.
+     *
+     * @var string
+     */
+    const STATUS_CART = 'cart';
+
+    #[ORM\Column(type: 'datetime')]
+    private $createdAt;
+
+    #[ORM\Column(type: 'datetime')]
+    private $updatedAt;
+
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getOrderTime(): ?\DateTimeInterface
+    /**
+     * @return Collection|OrderItem[]
+     */
+    public function getItems(): Collection
     {
-        return $this->OrderTime;
+        return $this->items;
     }
 
-    public function setOrderTime(\DateTimeInterface $OrderTime): self
+    public function removeItem(OrderItem $item): self
     {
-        $this->OrderTime = $OrderTime;
+        if ($this->items->removeElement($item)) {
+            // set the owning side to null (unless already changed)
+            if ($item->getOrderRef() === $this) {
+                $item->setOrderRef(null);
+            }
+        }
 
         return $this;
     }
 
-    public function getOrderDate(): ?\DateTimeInterface
+    public function getTotal(): float
     {
-        return $this->orderDate;
+        $total = 0;
+
+        foreach ($this->getItems() as $item) {
+            $total += $item->getTotal();
+        }
+
+        return $total;
     }
 
-    public function setOrderDate(\DateTimeInterface $orderDate): self
+    public function removeItems(): self
     {
-        $this->orderDate = $orderDate;
+        foreach ($this->getItems() as $item) {
+            $this->removeItem($item);
+        }
 
         return $this;
     }
 
-    public function getOrderTotal(): ?float
+    public function getStatus(): ?string
     {
-        return $this->orderTotal;
+        return $this->status;
     }
 
-    public function setOrderTotal(float $orderTotal): self
+    public function setStatus(string $status): self
     {
-        $this->orderTotal = $orderTotal;
+        $this->status = $status;
 
         return $this;
     }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function addItem(OrderItem $item): self
+    {
+        foreach ($this->getItems() as $existingItem) {
+            // The item already exists, update the quantity
+            if ($existingItem->equals($item)) {
+                $existingItem->setQuantity(
+                    $existingItem->getQuantity() + $item->getQuantity()
+                );
+                return $this;
+            }
+        }
+
+        $this->items[] = $item;
+        $item->setOrderRef($this);
+
+        return $this;
+    }
+
 }

@@ -1,13 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}home page{% endblock %}
+{% block title %}Home Page{% endblock %}
 
 {% block body %}
-
     {% if app.user %}
-        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+
     {% else %}
-        You are not logged in <a href="{{ path('app_login') }}">Log In </a><br>
-        New User ?  <a href="{{ path('user_new') }}">Register Here </a>
-    {%  endif %}
+        <h1>Welcome to our site<br>
+        Please Register or Log in to order</h1>
+    {% endif %}
+
+
+    {% if is_granted('ROLE_CUSTOMER') %}
+        <h1>Hello Customer</h1>
+    {% endif %}
+    {% if is_granted('ROLE_Chef') %}
+        <h1>Hello Chef</h1>
+    {% endif %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <h1>Hello Admin</h1>
+    {% endif %}
+
 {% endblock %}
+
+
+
