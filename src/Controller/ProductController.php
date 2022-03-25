@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Repository\OrderItemRepository;
+use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +26,24 @@ class ProductController extends AbstractController
         $template = 'product/product.html.twig';
         $argsArray = ['products' => $productRepository->findAll()];
 
+        return $this->render($template, $argsArray);
+    }
+
+    #[Route('/checkout', name: 'checkout')]
+    public function checkout(): Response
+    {
+        $template = 'product/checkout.html.twig';
+        $argsArray = [];
+
+        return $this->render($template, $argsArray);
+    }
+
+    #[Route('/basket', name: 'basket')]
+    public function basket(OrderRepository $orderRepository): Response
+    {
+
+        $template = 'product/basket.html.twig';
+        $argsArray = ['basketproducts' => $orderRepository->findall()];
         return $this->render($template, $argsArray);
     }
 }
