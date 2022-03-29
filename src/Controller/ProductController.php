@@ -11,10 +11,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 
 class ProductController extends AbstractController
 {
+
     #[Route('/product', name: 'product_index', methods: ['GET'])]
     public function index(ProductRepository $productRepository): Response
     {
@@ -90,11 +92,5 @@ class ProductController extends AbstractController
         return $this->render($template, $argsArray);
     }
 
-    #[Route('/basket', name: 'basket')]
-    public function basket(): Response
-    {
-        $template = 'product/basket.html.twig';
-        $argsArray = [];
-        return $this->render($template, $argsArray);
-    }
+
 }

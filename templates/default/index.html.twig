@@ -16,7 +16,12 @@
     {% if is_granted('ROLE_CUSTOMER') %}
         <h1>Hello Customer</h1>
     {% endif %}
-    {% if is_granted('ROLE_Chef') %}
+    {% if is_granted('ROLE_WAITER') %}
+        <a href="{{ path('table_index') }}">
+            Table booking
+        </a>
+    {% endif %}
+    {% if is_granted('ROLE_CHEF') %}
         <h1>Hello Chef</h1>
     {% endif %}
 
