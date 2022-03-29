@@ -3,6 +3,11 @@
 {% block title %}{{ product.name }}{% endblock %}
 
 {% block body %}
+    {% if app.user %}
+
+    {% else %}
+        <h1>Please Log in to Order<br>
+    {% endif %}
     {% if is_granted('ROLE_CUSTOMER') %}
     <div class="container">
         <div class="row mt-3 mb-4">
