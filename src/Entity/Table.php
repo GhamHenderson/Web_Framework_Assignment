@@ -14,28 +14,18 @@ class Table
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'boolean')]
-    private $TableAvailable;
 
     #[ORM\Column(type: 'integer')]
     private $TableCapacity;
+
+    #[ORM\ManyToOne(targetEntity: Status::class, inversedBy: 'tables')]
+    private $statusType;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTableAvailable(): ?bool
-    {
-        return $this->TableAvailable;
-    }
-
-    public function setTableAvailable(bool $TableAvailable): self
-    {
-        $this->TableAvailable = $TableAvailable;
-
-        return $this;
-    }
 
     public function getTableCapacity(): ?int
     {
@@ -45,6 +35,18 @@ class Table
     public function setTableCapacity(int $TableCapacity): self
     {
         $this->TableCapacity = $TableCapacity;
+
+        return $this;
+    }
+
+    public function getStatusType(): ?Status
+    {
+        return $this->statusType;
+    }
+
+    public function setStatusType(?Status $statusType): self
+    {
+        $this->statusType = $statusType;
 
         return $this;
     }

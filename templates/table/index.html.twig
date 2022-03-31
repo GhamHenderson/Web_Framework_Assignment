@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Table Reservation{% endblock %}
+{% block title %}Table index{% endblock %}
 
 {% block body %}
     <h1>Table index</h1>
@@ -9,16 +9,16 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Table Available</th>
-                <th>Table Capacity</th>
-                <th>Actions</th>
+                <th>Table Status</th>
+                <th>TableCapacity</th>
+                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for table in tables %}
             <tr>
                 <td>{{ table.id }}</td>
-                <td>{{ table.TableAvailable ? 'Yes' : 'No' }}</td>
+                <td>{{ table.statusType }}</td>
                 <td>{{ table.TableCapacity }}</td>
                 <td>
                     <a href="{{ path('table_show', {'id': table.id}) }}">show</a>

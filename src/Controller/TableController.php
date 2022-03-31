@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Table;
-use App\Form\TableType;
+use App\Form\Table1Type;
 use App\Repository\TableRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +26,7 @@ class TableController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $table = new Table();
-        $form = $this->createForm(TableType::class, $table);
+        $form = $this->createForm(Table1Type::class, $table);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,7 +53,7 @@ class TableController extends AbstractController
     #[Route('/{id}/edit', name: 'table_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Table $table, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(TableType::class, $table);
+        $form = $this->createForm(Table1Type::class, $table);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
