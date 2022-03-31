@@ -3,15 +3,15 @@
 {% block title %}Table index{% endblock %}
 
 {% block body %}
-    <h1>Table index</h1>
+    <h1>Waiter Reservation Area</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Table Number</th>
                 <th>Table Status</th>
-                <th>TableCapacity</th>
-                <th>actions</th>
+                <th>Table Capacity</th>
+                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -21,8 +21,7 @@
                 <td>{{ table.statusType }}</td>
                 <td>{{ table.TableCapacity }}</td>
                 <td>
-                    <a href="{{ path('table_show', {'id': table.id}) }}">show</a>
-                    <a href="{{ path('table_edit', {'id': table.id}) }}">edit</a>
+                    <a href="{{ path('table_edit', {'id': table.id}) }}">Edit Table {{ table.id }}</a>
                 </td>
             </tr>
         {% else %}
