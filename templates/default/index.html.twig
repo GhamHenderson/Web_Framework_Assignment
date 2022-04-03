@@ -8,9 +8,13 @@
         <div class="col-lg-6 mx-auto">
             <p class="lead mb-4">Welcome to our Restauraunt, Please order from our menu and we will deliver to your table!<br></p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Log in</button>
-                <button type="button" class="btn btn-outline-secondary btn-lg px-4">Register</button>
-            </div>
+                {% if app.user %}
+                {% else %}
+                    <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Log in</button>
+                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Register</button>
+
+                {%  endif %}
+          </div>
         </div>
     </div>
 

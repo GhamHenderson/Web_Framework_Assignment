@@ -1,43 +1,91 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1>Basket Page</h1><br><br>
-    <h1>Basket</h1>
     {% set basket = app.session.get('basket') %}
-    {% if basket is null %}
-    <p>
-        you have no products in your basket
-    </p>
-    {% else %}
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-    {% for product in basket %}
-        <tr>
-            <td>{{ product.id }}</td>
-            <td>{{ product.name }} </td>
-            <td>{{ product.price }}</td>
-            <td>1</td>
-            <td><a href={{ path('delete', {'id': product.id}) }}>Remove Item</a></td>
-        </tr>
-    {% endfor %}
-    </table>
-    {% endif %}
 
-    <br><Br><Br>
-    <a href="{{ path('product_index') }}">
-        Add More items to Cart ?
-    </a>
-    <br>
-    <a href="{{ path('checkout') }}">
-        Checkout
-    </a>
+    <section class="h-100 h-custom" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col">
+                    <div class="card mb-3 mb-lg-0">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex flex-row align-items-center">
+                                    <div class="ms-3">
+                                        <h5>Product Name</h5>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row align-items-center">
+                                    <div style="width: 100px;">
+                                        <h5 class="fw-normal mb-0">Quantity      </h5>
+                                    </div>
+                                    <div style="width: 80px;">
+                                        <h5 class="fw-normal mb-0">Price</h5>
+                                    </div>
+                                    <div style="width: 130px;">
+                                        <h5 class="fw-normal mb-0">Action</h5>
+                                    </div>
+                                    <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
 
-{% endblock %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <div class="row">
+                                {% for product in basket %}
+                                <div class="card mb-3 mb-lg-0">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex flex-row align-items-center">
+                                                <div>
+                                                    <img src={{ asset('img/burger.jpg')}} class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                                                </div>
+                                                <div class="ms-3">
+                                                    <h5>{{ product.name }}</h5>
+                                                    <p class="small mb-0">{{ product.description }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center">
+                                                <div style="width: 50px;">
+                                                    <h5 class="fw-normal mb-0">1.</h5>
+                                                </div>
+                                                <div style="width: 80px;">
+                                                    <h5 class="mb-0">€ {{ product.price }}</h5>
+                                                </div>
+                                                <div style="width: 130px;">
+                                                    <a href={{ path('delete', {'id': product.id}) }}>Remove Item</a>
+                                                </div>
+                                                <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="card mb-3 mb-lg-0">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex flex-row align-items-center">
+                                            <div class="ms-3">
+                                                <h5>Basket Total:</h5>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-row align-items-center">
+                                            <div style="width: 100px;">
+                                            </div>
+                                            <div style="width: 80px;">
+                                                <h5 class="mb-0"> 80.00</h5>
+                                            </div>
+                                            <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Continue Shopping</button>
+                            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Check Out</button>
+
+                            {% endblock %}

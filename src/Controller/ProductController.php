@@ -49,15 +49,15 @@ class ProductController extends AbstractController
     #[Route('/product/{id}/edit', name: 'product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
-        if($this->getUser()->getRoles() == 'ROLE_ADMIN') {
+       // if($this->getUser()->getRoles() == 'ROLE_ADMIN') {
             $form = $this->createForm(Product1Type::class, $product);
             $form->handleRequest($request);
-        }
-        else
-        {
-            $form = $this->createForm(ChefType::class, $product);
-            $form->handleRequest($request);
-        }
+      //  }
+//        else if($this->getUser()->getRoles() == 'ROLE_CHEF')
+//        {
+//            $form = $this->createForm(ChefType::class, $product);
+//            $form->handleRequest($request);
+//        }
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
