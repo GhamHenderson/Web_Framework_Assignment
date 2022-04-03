@@ -3,17 +3,9 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+    <main class="form-signin">
 <form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
-
+    <img class="mb-4" src={{ asset('img/logo.png')}} alt="" width="72" height="57">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="inputUsername">Username</label>
     <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
@@ -22,14 +14,10 @@
 
     <input type="hidden" name="_csrf_token"  value="{{ csrf_token('authenticate') }}">
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-
     <button class="btn btn-lg btn-primary" type="submit">
         Sign in
     </button>
+
 </form>
+    </main>
 {% endblock %}

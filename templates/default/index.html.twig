@@ -3,31 +3,18 @@
 {% block title %}Home Page{% endblock %}
 
 {% block body %}
+    <div class="px-4 py-5 my-5 text-center">
+        <img class="d-block mx-auto mb-4" src={{ asset("/img/logo.png")}} alt="logo" width="300" height="200">
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">Welcome to our Restauraunt, Please order from our menu and we will deliver to your table!<br></p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Log in</button>
+                <button type="button" class="btn btn-outline-secondary btn-lg px-4">Register</button>
+            </div>
+        </div>
+    </div>
 
-    <h1>Home Page</h1>
-    {% if app.user %}
 
-    {% else %}
-        <h1>Welcome to our site<br>
-        Please Register or Log in to order</h1>
-    {% endif %}
-
-
-    {% if is_granted('ROLE_CUSTOMER') %}
-        <h1>Hello Customer</h1>
-    {% endif %}
-    {% if is_granted('ROLE_WAITER') %}
-        <a href="{{ path('table_index') }}">
-            Table booking
-        </a>
-    {% endif %}
-    {% if is_granted('ROLE_CHEF') %}
-        <h1>Hello Chef</h1>
-    {% endif %}
-
-    {% if is_granted('ROLE_ADMIN') %}
-        <h1>Hello Admin</h1>
-    {% endif %}
 
 {% endblock %}
 
