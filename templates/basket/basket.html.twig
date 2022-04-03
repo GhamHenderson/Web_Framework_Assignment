@@ -84,8 +84,7 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Continue Shopping</button>
-                            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Check Out</button>
+                            <a class="btn btn-dark" href="{{ path('product_index') }}" role="button">Continue Shopping</a>
+                            <a class="btn btn-dark" href="{{ path('checkout') }}" role="button">Checkout</a>
 
                             {% endblock %}

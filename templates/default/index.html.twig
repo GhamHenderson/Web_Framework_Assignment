@@ -7,12 +7,17 @@
         <img class="d-block mx-auto mb-4" src={{ asset("/img/logo.png")}} alt="logo" width="300" height="200">
         <div class="col-lg-6 mx-auto">
             <p class="lead mb-4">Welcome to our Restauraunt, Please order from our menu and we will deliver to your table!<br></p>
+            {% if app.user %}
+            {% else %}
+            <p class="lead mb-4">Please log in or Register to make an order</p>
+            {% endif %}
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                 {% if app.user %}
+                <a class="btn btn-dark" href="{{ path('product_index') }}" role="button">View Menu</a>
                 {% else %}
-                    <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Log in</button>
-                    <button type="button" class="btn btn-outline-secondary btn-lg px-4">Register</button>
-
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <a class="btn btn-dark" href="{{ path('app_login') }}" role="button">Login</a>
+                    <a class="btn btn-dark" href="{{ path('user_new') }}" role="button">Register</a>
                 {%  endif %}
           </div>
         </div>
