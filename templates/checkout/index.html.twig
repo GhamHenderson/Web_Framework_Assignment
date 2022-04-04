@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Checkout index{% endblock %}
+
+{% block body %}
+    {%if is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NameOnCard</th>
+                <th>CardNumber</th>
+                <th>ExpiryDate</th>
+                <th>Table Number</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for checkout in checkouts %}
+            <tr>
+                <td>{{ checkout.id }}</td>
+                <td>{{ checkout.NameOnCard }}</td>
+                <td>{{ checkout.cardNumber }}</td>
+                <td>{{ checkout.expiryDate ? checkout.expiryDate|date('Y-m-d') : '' }}</td>
+                <td>{{ checkout.seat }}</td>
+                <td>
+                    <a href="{{ path('app_checkout_show', {'id': checkout.id}) }}">show</a>
+                    <a href="{{ path('app_checkout_edit', {'id': checkout.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_checkout_new') }}">Create new</a>
+    {% endif %}
+     {% if is_granted('ROLE_CUSTOMER')%}
+         <div class="px-4 py-5 my-5 text-center">
+             <img class="d-block mx-auto mb-4" src="{{ asset('img/logo.png') }}" alt="" width="200" height="100">
+             <h1 class="display-5 fw-bold">Thank you for your order! </h1>
+             <div class="col-lg-6 mx-auto">
+                 <p class="lead mb-4">Your food will be brought to your table as soon as possible.</p>
+                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                     <a class="btn btn-dark" href="{{ path('default') }}" role="button">Homepage</a>
+                 </div>
+             </div>
+         </div>
+     {% endif %}
+{% endblock %}

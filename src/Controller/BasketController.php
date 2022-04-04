@@ -22,7 +22,8 @@ class BasketController extends AbstractController
     public function index(): Response
     {   $session = $this->requestStack->getSession();
         $template = 'basket/basket.html.twig';
-        $args = [$session];
+        $total = 0; //= $this->getTotal();
+        $args = [$session, 'total' => $total];
         return $this->render($template,$args);
     }
 
@@ -47,6 +48,7 @@ class BasketController extends AbstractController
             // store updated array back into the session
             $session->set('basket', $products);
         }
+
         $logger->info('Basket', [
             'basket' => $products
         ]);
@@ -87,5 +89,17 @@ class BasketController extends AbstractController
         $session->clear();
 
         return $this->redirectToRoute('basket');
+    }
+
+    public function getTotal(){
+        $total = 0;
+        $session = $this->requestStack->getSession();
+        if ($session->has('basket')) {
+            $products = $session->get('basket');
+        }
+        foreach($products as $product){
+            $total = $total + $product->price;
+        }
+        return $total;
     }
 }
