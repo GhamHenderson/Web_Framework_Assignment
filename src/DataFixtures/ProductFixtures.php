@@ -6,19 +6,29 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Product;
+use App\Factory\ProductFactory;
 
 class ProductFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        for ($i = 1; $i <= 10; $i++) {
-            $product = new Product();
-            $product
-                ->setName('Product ' . $i)
-                ->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua')
-                ->setPrice(2.00);
-            $manager->persist($product);
-        }
-        $manager->flush();
+        ProductFactory::createOne([
+            'name' => 'item1',
+            'description' => 'nice',
+            'price' => 2.50,
+            'image' => 'img/burger2.jpg'
+        ]);
+        ProductFactory::createOne([
+            'name' => 'item2',
+            'description' => 'nice',
+            'price' => 2.00,
+            'image' => 'img/burger2.jpg'
+        ]);
+        ProductFactory::createOne([
+            'name' => 'item3',
+            'description' => 'Super nice',
+            'price' => 2.50,
+            'image' => 'img/burger2.jpg'
+        ]);
     }
 }

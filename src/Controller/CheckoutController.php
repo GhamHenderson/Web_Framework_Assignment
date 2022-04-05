@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Checkout;
-use App\Form\CheckoutType;
+use App\Form\Checkout1Type;
 use App\Repository\CheckoutRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,10 +14,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class CheckoutController extends AbstractController
 {
     #[Route('/', name: 'app_checkout_index', methods: ['GET'])]
-    public function index(CheckoutRepository $checkoutRepository, Checkout $checkout): Response
+    public function index(CheckoutRepository $checkoutRepository): Response
     {
-        $template = 'checkout/index.html.twig';
-        return $this->render($template,[
+        return $this->render('checkout/index.html.twig', [
             'checkouts' => $checkoutRepository->findAll(),
         ]);
     }
@@ -26,7 +25,7 @@ class CheckoutController extends AbstractController
     public function new(Request $request, CheckoutRepository $checkoutRepository): Response
     {
         $checkout = new Checkout();
-        $form = $this->createForm(CheckoutType::class, $checkout);
+        $form = $this->createForm(Checkout1Type::class, $checkout);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -51,7 +50,7 @@ class CheckoutController extends AbstractController
     #[Route('/{id}/edit', name: 'app_checkout_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Checkout $checkout, CheckoutRepository $checkoutRepository): Response
     {
-        $form = $this->createForm(CheckoutType::class, $checkout);
+        $form = $this->createForm(Checkout1Type::class, $checkout);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

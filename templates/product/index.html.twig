@@ -78,13 +78,7 @@
             {% for product in products %}
                 <div class="col-md-4">
                     <div class="card mb-4">
-                        {% if product.id == 1 %}
-                            <img src="{{ asset('img/chips.jpg') }}" alt="{{ product.name }}" class="card-img-top">
-                        {% endif %}
-                        {% if product.id != 1 %}
-                            <img src="{{ asset('img/burger.jpg') }}" alt="{{ product.name }}" class="card-img-top">
-                        {% endif %}
-
+                            <img src="{{ asset("{{ product.image }}") }}" alt="{{ product.name }}" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="card-text">{{ product.description }}</p>
