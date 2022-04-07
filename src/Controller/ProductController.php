@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Entity\User;
 use App\Form\ChefType;
 use App\Form\Product1Type;
 use App\Repository\OrderRepository;
@@ -49,15 +50,23 @@ class ProductController extends AbstractController
     #[Route('/product/{id}/edit', name: 'product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
-       // if($this->getUser()->getRoles() == 'ROLE_ADMIN') {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $user = new User();
+        $roles = $user->getRoles();
+
+        If(in_array("ROLE_ADMIN", $roles)){
             $form = $this->createForm(Product1Type::class, $product);
             $form->handleRequest($request);
-      //  }
-//        else if($this->getUser()->getRoles() == 'ROLE_CHEF')
-//        {
-//            $form = $this->createForm(ChefType::class, $product);
-//            $form->handleRequest($request);
-//        }
+        }
+        else If(in_array("ROLE_MANAGER", $roles)){
+            $form = $this->createForm(Product1Type::class, $product);
+            $form->handleRequest($request);
+        }
+        else If(in_array("ROLE_CHEF", $roles)){
+            $form = $this->createForm(ChefType::class, $product);
+            $form->handleRequest($request);
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 

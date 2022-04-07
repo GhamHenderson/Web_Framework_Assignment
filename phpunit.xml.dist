@@ -8,6 +8,15 @@
          bootstrap="tests/bootstrap.php"
          convertDeprecationsToExceptions="false"
 >
+    <logging>
+        <junit outputFile="junit.xml"/>
+        <teamcity outputFile="./build/teamcity.txt"/>
+        <testdoxHtml outputFile="./build/testdox.html"/>
+        <testdoxText outputFile="./build/testdox.txt"/>
+        <testdoxXml outputFile="./build/testdox.xml"/>
+        <text outputFile="./build/logfile.txt"/>
+    </logging>
+
     <php>
         <ini name="display_errors" value="1" />
         <ini name="error_reporting" value="-1" />
