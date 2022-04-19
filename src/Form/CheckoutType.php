@@ -16,7 +16,7 @@ class CheckoutType extends AbstractType
             ->add('NameOnCard')
             ->add('cardNumber')
             ->add('expiryDate')
-            ->add('seat')
+            ->add('seat');
 //            ->add('my_file', FileType::class, [
 //                'mapped' => false,
 //                'label' => " If Payment is Accepted please upload receipt",

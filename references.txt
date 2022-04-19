@@ -1,1 +1,15 @@
+External Sources Used :
 FileUpload -> https://symfonycasts.com/screencast/symfony-uploads
+Calendar -> https://github.com/tattali/CalendarBundle/blob/master/src/Resources/doc/doctrine-crud.md
+            Matts Github Project -> https://github.com/dr-matt-smith/2022-symfony6-calendar-demo
+
+Members -> Graham Henderson, James Moore, Steven Lundy
+
+Github -> https://github.com/GhamHenderson/Web_Framework_Assignment
+
+Project Name: Bia Maith (Good Food)
+
+Advanced Features
+-> Hosting on Fortrabbit
+-> File Upload
+-> Calendar for bookings
