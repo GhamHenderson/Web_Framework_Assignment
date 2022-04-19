@@ -13,22 +13,22 @@ class ProductFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         ProductFactory::createOne([
-            'name' => 'item1',
-            'description' => 'nice',
+            'name' => 'Beef Burger',
+            'description' => 'nice fresh beef burger',
             'price' => 2.50,
-            'image' => 'img/burger2.jpg'
+            'image_filename' => 'img/burger2.jpg'
         ]);
         ProductFactory::createOne([
-            'name' => 'item2',
-            'description' => 'nice',
+            'name' => 'Fries',
+            'description' => 'nice salted fries',
             'price' => 2.00,
-            'image' => 'img/burger2.jpg'
+            'image_filename' => 'img/burger2.jpg'
         ]);
         ProductFactory::createOne([
-            'name' => 'item3',
-            'description' => 'Super nice',
+            'name' => 'Chicken Burger',
+            'description' => 'Super nice chicken in a burger. i love chicken!',
             'price' => 2.50,
-            'image' => 'img/burger2.jpg'
+            'image_filename' => 'img/burger2.jpg'
         ]);
     }
 }

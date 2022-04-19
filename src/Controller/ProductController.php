@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Entity\User;
-use App\Form\ChefType;
 use App\Form\Product1Type;
 use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
@@ -14,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RequestStack;
-
+use Gedmo\Sluggable\Util\Urlizer;
 
 class ProductController extends AbstractController
 {
@@ -50,26 +48,26 @@ class ProductController extends AbstractController
     #[Route('/product/{id}/edit', name: 'product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        $user = new User();
-        $roles = $user->getRoles();
+        $form = $this->createForm(Product1Type::class, $product);
 
-        If(in_array("ROLE_ADMIN", $roles)){
-            $form = $this->createForm(Product1Type::class, $product);
-            $form->handleRequest($request);
+        //$uploadedFile = $request->files->get('image');
+        $uploadedFile = $form['imageFilename']->getData();
+        if ($uploadedFile != null) {
+            $destination = $this->getParameter('kernel.project_dir') . '/public/uploads/menuImages';
+            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $newFilename = $originalFilename . '-' . uniqid() . '.' . $uploadedFile->guessExtension();
+            $uploadedFile->move(
+                $destination,
+                $newFilename
+            );
+
+            $product->setImageFilename($newFilename);
         }
-        else If(in_array("ROLE_MANAGER", $roles)){
-            $form = $this->createForm(Product1Type::class, $product);
-            $form->handleRequest($request);
-        }
-        else If(in_array("ROLE_CHEF", $roles)){
-            $form = $this->createForm(ChefType::class, $product);
-            $form->handleRequest($request);
-        }
+
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
             return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
         }
 

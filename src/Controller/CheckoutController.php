@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Checkout;
-
 use App\Form\CheckoutType;
 use App\Repository\CheckoutRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Gedmo\Sluggable\Util\Urlizer;
+
 
 #[Route('/checkout')]
 class CheckoutController extends AbstractController

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,7 +16,11 @@ class Product1Type extends AbstractType
             ->add('name')
             ->add('description')
             ->add('price')
-        ;
+            ->add('imageFilename', FileType::class, [
+                'mapped' => false,
+                'label' => "Upload Product Image",
+                'required' => false
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

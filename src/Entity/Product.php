@@ -22,6 +22,9 @@ class Product
     #[ORM\Column(type: 'float')]
     private $price;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $imageFilename;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Product
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getImageFilename(): ?string
+    {
+        return $this->imageFilename;
+    }
+
+    public function setImageFilename(string $imageFilename): self
+    {
+        $this->imageFilename = $imageFilename;
 
         return $this;
     }

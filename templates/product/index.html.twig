@@ -13,6 +13,7 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
+                <th>Image</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -23,6 +24,7 @@
                 <td>{{ product.name }}</td>
                 <td>{{ product.description }}</td>
                 <td>{{ product.price }}</td>
+                <td>{{ product.imageFilename }}</td>
                 <td>
                     <a href="{{ path('product_edit', {'id': product.id}) }}">Edit Item</a>
                 </td>
@@ -78,7 +80,7 @@
             {% for product in products %}
                 <div class="col-md-4">
                     <div class="card mb-4">
-                            <img src="{{ asset("{{ product.image }}") }}" alt="{{ product.name }}" class="card-img-top">
+                            <img src="{{ product.imageFilename }}" alt="{{ product.name }}" class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="card-text">{{ product.description }}</p>
