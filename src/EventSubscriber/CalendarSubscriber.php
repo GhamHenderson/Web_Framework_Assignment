@@ -1,5 +1,6 @@
 <?php
 
+namespace App\EventSubscriber;
 
 namespace App\EventSubscriber;
 use App\Repository\BookingRepository;
