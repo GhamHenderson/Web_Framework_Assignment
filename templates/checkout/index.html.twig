@@ -12,6 +12,7 @@
                 <th>NameOnCard</th>
                 <th>CardNumber</th>
                 <th>ExpiryDate</th>
+                <th>PaymentAccepted</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td>{{ checkout.NameOnCard }}</td>
                 <td>{{ checkout.cardNumber }}</td>
                 <td>{{ checkout.expiryDate ? checkout.expiryDate|date('Y-m-d') : '' }}</td>
+                <td>{{ checkout.paymentAccepted ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('app_checkout_show', {'id': checkout.id}) }}">show</a>
                     <a href="{{ path('app_checkout_edit', {'id': checkout.id}) }}">edit</a>
@@ -29,7 +31,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

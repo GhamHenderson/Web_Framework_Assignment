@@ -25,6 +25,9 @@ class Checkout
     #[ORM\Column(type: 'date')]
     private $expiryDate;
 
+    #[ORM\Column(type: 'boolean')]
+    private $paymentAccepted;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Checkout
     public function setExpiryDate(\DateTimeInterface $expiryDate): self
     {
         $this->expiryDate = $expiryDate;
+
+        return $this;
+    }
+
+    public function getPaymentAccepted(): ?bool
+    {
+        return $this->paymentAccepted;
+    }
+
+    public function setPaymentAccepted(bool $paymentAccepted): self
+    {
+        $this->paymentAccepted = $paymentAccepted;
 
         return $this;
     }

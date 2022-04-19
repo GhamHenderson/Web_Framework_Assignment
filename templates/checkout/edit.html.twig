@@ -5,7 +5,13 @@
 {% block body %}
     <h1>Edit Checkout</h1>
 
+
     {{ include('checkout/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <form method="POST" action="{{ path('upload_test') }}" enctype="multipart/form-data">
+        <input type="file" name="image">
+        <button type="submit" class="btn btn-primary">Upload Receipt</button>
+    </form>
 
     <a href="{{ path('app_checkout_index') }}">back to list</a>
 

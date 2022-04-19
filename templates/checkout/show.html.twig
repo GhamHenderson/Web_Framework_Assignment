@@ -23,6 +23,10 @@
                 <th>ExpiryDate</th>
                 <td>{{ checkout.expiryDate ? checkout.expiryDate|date('Y-m-d') : '' }}</td>
             </tr>
+            <tr>
+                <th>PaymentAccepted</th>
+                <td>{{ checkout.paymentAccepted ? 'Yes' : 'No' }}</td>
+            </tr>
         </tbody>
     </table>
 

@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Checkout;
-use App\Form\Checkout1Type;
+
+use App\Form\CheckoutType;
 use App\Repository\CheckoutRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +26,7 @@ class CheckoutController extends AbstractController
     public function new(Request $request, CheckoutRepository $checkoutRepository): Response
     {
         $checkout = new Checkout();
-        $form = $this->createForm(Checkout1Type::class, $checkout);
+        $form = $this->createForm(CheckoutType::class, $checkout);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -50,11 +51,14 @@ class CheckoutController extends AbstractController
     #[Route('/{id}/edit', name: 'app_checkout_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Checkout $checkout, CheckoutRepository $checkoutRepository): Response
     {
-        $form = $this->createForm(Checkout1Type::class, $checkout);
+
+        $form = $this->createForm(CheckoutType::class, $checkout);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $checkoutRepository->add($checkout);
+            $file = $form->get('my_file')->getData();
+
             return $this->redirectToRoute('app_checkout_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -73,4 +77,18 @@ class CheckoutController extends AbstractController
 
         return $this->redirectToRoute('app_checkout_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/upload/test', name: 'upload_test', methods: ['POST'])]
+    public function upload(Request $request): Response
+    {
+        $uploadedFile = $request->files->get('image');
+        $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
+        $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+        $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+        dd($uploadedFile->move(
+            $destination,
+            $newFilename
+        ));
+    }
+
 }
