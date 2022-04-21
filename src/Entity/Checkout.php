@@ -26,7 +26,7 @@ class Checkout
     private $expiryDate;
 
     #[ORM\Column(type: 'boolean')]
-    private $paymentAccepted;
+    private $paymentAccepted = false;
 
     public function getId(): ?int
     {
@@ -88,7 +88,11 @@ class Checkout
 
     public function setPaymentAccepted(bool $paymentAccepted): self
     {
+
         $this->paymentAccepted = $paymentAccepted;
+        if ($this == null){
+            $this->paymentAccepted = true;
+        }
 
         return $this;
     }
