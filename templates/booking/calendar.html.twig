@@ -1,8 +1,19 @@
 {# templates/booking/calendar.html.twig #}
 {% extends 'base.html.twig' %}
 {% block body %}
-    <a href="{{ path('app_booking_new') }}">Create new booking</a>
+
+    <div class="d-inline-flex p-2 justify-content-center">
+        <a class="btn btn-primary" data-toggle="collapse" href="{{ path('app_booking_new') }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+            New Booking
+        </a>
+    </div>
     <div id="calendar-holder"></div>
+    <style>
+        #calendar-holder {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+    </style>
 
 {% endblock %}
 {% block stylesheets %}

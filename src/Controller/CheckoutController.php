@@ -32,7 +32,7 @@ class CheckoutController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $checkoutRepository->add($checkout);
-            return $this->redirectToRoute('app_checkout_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('booking_calendar', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('checkout/new.html.twig', [

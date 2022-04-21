@@ -9,7 +9,7 @@ use App\Factory\UserFactory;
 use App\Factory\MakeFactory;
 use App\Factory\PhoneFactory;
 
-class AppFixtures extends Fixture
+class UserFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
