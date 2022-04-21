@@ -42,7 +42,7 @@ final class ProductFactory extends ModelFactory
             'name' => self::faker()->text(),
             'description' => self::faker()->text(),
             'price' => self::faker()->randomFloat(),
-            'image' => self::faker()->text(),
+            'imageFilename' => self::faker()->text(),
         ];
     }
 
