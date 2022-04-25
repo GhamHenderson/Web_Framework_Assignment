@@ -7,8 +7,10 @@ use App\Entity\Product;
 use App\Entity\Status;
 use App\Entity\Table;
 use App\Entity\User;
+use App\Security\LoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use TypeError;
+
 
 class UnitClassTesting extends KernelTestCase
 {
@@ -58,4 +60,46 @@ class UnitClassTesting extends KernelTestCase
         $admin->setRole("ROLE_CUSTOMER");
         $this->assertNotEquals($admin,$customer);
     }
+
+    function test7RemoveTable(){
+
+        $table = new Status();
+        $table->setStatusType(null);
+
+        $this->assertLessThan();Than(1, $table->getStatusType());
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function test8PaymentAccepted()
+    {
+        $Payment = new Checkout();
+        $this->assertSame(null, $Payment->getPaymentAccepted());
+        $Payment->setPaymentAccepted(false);
+        $this->assertSame(false, $Payment->getPaymentAccepted());
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function test9DoRedirection()
+    {
+        $authSuccess = new LoginFormAuthenticator();
+        $authSuccess->onAuthenticationSuccess();
+
+        $this->assertContains(
+            'Location: default/index.html.twig', xdebug_get_headers()
+        );
+    }
+
+    public function test10CheckCardLength()
+    {
+        $card = new Checkout();
+       $card->setCardNumber(15);
+
+       $this->assertGreaterThan(12, $card->getCardNumber());
+    }
+
+
 }
