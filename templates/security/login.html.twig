@@ -3,6 +3,16 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+    <style>
+        .contain{
+            padding: 30px;
+        }
+
+        .signinbutton{
+            padding-top: 20px;
+        }
+    </style>
+    <div class="contain">
     <main class="form-signin">
 <form method="post">
     <img class="mb-4" src={{ asset('img/logo.png')}} alt="" width="72" height="57">
@@ -13,11 +23,13 @@
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token"  value="{{ csrf_token('authenticate') }}">
-
+    <div class="signinbutton">
     <button class="btn btn-lg btn-primary" type="submit">
         Sign in
     </button>
+    </div>
 
 </form>
     </main>
+    </div>
 {% endblock %}

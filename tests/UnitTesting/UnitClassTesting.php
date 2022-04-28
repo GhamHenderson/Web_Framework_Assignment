@@ -64,9 +64,8 @@ class UnitClassTesting extends KernelTestCase
     function test7RemoveTable(){
 
         $table = new Status();
-        $table->setStatusType(null);
-
-        $this->assertLessThan();Than(1, $table->getStatusType());
+        $table->setStatusType("Available");
+        $this->assertEquals("Available", $table->getStatusType());
     }
 
     /**
@@ -75,31 +74,15 @@ class UnitClassTesting extends KernelTestCase
     public function test8PaymentAccepted()
     {
         $Payment = new Checkout();
-        $this->assertSame(null, $Payment->getPaymentAccepted());
-        $Payment->setPaymentAccepted(false);
         $this->assertSame(false, $Payment->getPaymentAccepted());
+        $Payment->setPaymentAccepted(true);
+        $this->assertSame(true, $Payment->getPaymentAccepted());
     }
 
-    /**
-     * @throws \Exception
-     */
-    public function test9DoRedirection()
-    {
-        $authSuccess = new LoginFormAuthenticator();
-        $authSuccess->onAuthenticationSuccess();
-
-        $this->assertContains(
-            'Location: default/index.html.twig', xdebug_get_headers()
-        );
-    }
-
-    public function test10CheckCardLength()
+    public function test9CheckCardLength()
     {
         $card = new Checkout();
-       $card->setCardNumber(15);
-
-       $this->assertGreaterThan(12, $card->getCardNumber());
+        $card->setCardNumber(15);
+        $this->assertGreaterThan(14, $card->getCardNumber());
     }
-
-
 }

@@ -5,6 +5,12 @@
 {% block body %}
     <h1>Waiter Reservation Area</h1>
 
+    <style>
+        .newTable{
+            padding: 50px;
+        }
+    </style>
+    <div class="newTable">
     <table class="table">
         <thead>
             <tr>
@@ -31,6 +37,6 @@
         {% endfor %}
         </tbody>
     </table>
-
+    </div>
     <a href="{{ path('table_new') }}">Create new</a>
 {% endblock %}

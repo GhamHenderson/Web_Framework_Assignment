@@ -23,6 +23,8 @@ class BasketController extends AbstractController
     {
         $template = 'basket/basket.html.twig';
         $total = $this->getTotal();
+        $logger->info($total);
+
         $args = ['total' => $total];
         return $this->render($template,$args);
     }
@@ -92,12 +94,12 @@ class BasketController extends AbstractController
     }
 
     public function getTotal(){
-        $product = new Product();
 
         $products = [];
         $session = $this->requestStack->getSession();
         if ($session->has('basket')) {
             $products = $session->get('basket');
+            var_dump($products);
         }
 
         return array_sum($products);

@@ -1,11 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Product index{% endblock %}
+{% block title %}Menu Page{% endblock %}
 
 {% block body %}
     {% if is_granted('ROLE_MANAGER') or is_granted('ROLE_ADMIN') %}
-    <h1>Product index</h1>
 
+        <style>
+            .list-group{
+                padding: 100px;
+                font-family: Candara, serif;
+            }
+        </style>
+    <h1>Admin Page</h1>
+<div class="list-group">
     <table class="table">
         <thead>
             <tr>
@@ -36,7 +43,7 @@
         {% endfor %}
         </tbody>
     </table>
-
+</div>
     <a href="{{ path('product_new') }}">Create new</a>
     {% endif %}
 
