@@ -22,6 +22,7 @@ class BasketController extends AbstractController
     public function index(LoggerInterface $logger): Response
     {
         $template = 'basket/basket.html.twig';
+
         $total = $this->getTotal();
         $logger->info($total);
 
@@ -94,14 +95,19 @@ class BasketController extends AbstractController
     }
 
     public function getTotal(){
-
+        $total = 0;
         $products = [];
         $session = $this->requestStack->getSession();
+
         if ($session->has('basket')) {
             $products = $session->get('basket');
             var_dump($products);
+            foreach ($products as $product){
+                $total = $product->price + $total;
+            }
         }
-
-        return array_sum($products);
+        
+        var_dump($total);
+        return $total;
     }
 }
