@@ -22,6 +22,14 @@
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                     <a class="btn btn-dark" href="{{ path('addtobasket', {id: product.id}) }}" role="button">Add to Basket</a>
                     <a class="btn btn-dark" href="{{ path('product_index') }}" role="button">Return</a>
+                        <label for="exampleFormControlSelect1">Quantity</label>
+                        <select class="form-control" id="itemQuantity">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
                 </div>
             </div>
         </div>

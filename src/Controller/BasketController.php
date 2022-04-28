@@ -101,13 +101,10 @@ class BasketController extends AbstractController
 
         if ($session->has('basket')) {
             $products = $session->get('basket');
-            var_dump($products);
             foreach ($products as $product){
-                $total = $product->price + $total;
+                $total = $product->getPrice() + $total;
             }
         }
-        
-        var_dump($total);
         return $total;
     }
 }

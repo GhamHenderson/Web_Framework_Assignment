@@ -16,19 +16,22 @@ class ProductFixtures extends Fixture
             'name' => 'Beef Burger',
             'description' => 'nice fresh beef burger',
             'price' => 2.50,
-            'imageFilename' => 'img/burger2.jpg'
+            'imageFilename' => 'img/burger2.jpg',
+            'quantity' => '1'
         ]);
         ProductFactory::createOne([
             'name' => 'Fries',
             'description' => 'nice salted fries',
             'price' => 2.00,
-            'imageFilename' => 'img/burger2.jpg'
+            'imageFilename' => 'img/burger2.jpg',
+            'quantity' => '1'
         ]);
         ProductFactory::createOne([
             'name' => 'Chicken Burger',
             'description' => 'Super nice chicken in a burger. i love chicken!',
             'price' => 2.50,
-            'imageFilename' => 'img/burger2.jpg'
+            'imageFilename' => 'img/burger2.jpg',
+            'quantity' => '1'
         ]);
     }
 }
