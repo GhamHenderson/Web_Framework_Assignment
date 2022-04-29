@@ -10,7 +10,6 @@ class HomePageTest extends WebTestCase
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
-
         $this->assertResponseIsSuccessful();
     }
 
