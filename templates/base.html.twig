@@ -31,12 +31,12 @@
             </li>
             {% if is_granted('ROLE_WAITER') or is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') %}
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('table_index') }}">Table Service</a>
+                <a class="nav-link" id = "table_service" href="{{ path('table_index') }}">Table Service</a>
             </li>
             {% endif %}
             {% if is_granted('ROLE_ADMIN')%}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('user_index') }}">Admin Area</a>
+                    <a class="nav-link" id = "admin_area" href="{{ path('user_index') }}">Admin Area</a>
                 </li>
             {% endif %}
             <li class="nav-item">
